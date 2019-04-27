@@ -1,0 +1,10 @@
+{
+    "name": "advancedTitleBar",
+    "version": "1.0.0",
+    "description": "Allows you to configure custom program shortcuts on the title bar (Extension of pc-titleBarGames, works independently as well though)",
+    "author": "MrLar#2565",
+    "license": "MIT",
+    "optionalDependencies": [
+        "pc-titleBarGames"
+    ]
+}
