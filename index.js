@@ -29,13 +29,12 @@ module.exports = class AdvancedTitleBar extends Plugin {
   getApplications () {
     const cmds = this.settings.get('cmds').filter(c => c.value)
     const images = this.settings.get('images').filter(c => c.value)
-    const classes = 'powercord-apps-img'
     return cmds.map(({ key, value }, i) => {
       if (!images[i]) {
         return null
       }
       return React.createElement('div', {
-        className: classes,
+        className: 'powercord-apps-img',
         onClick: () => openItem(value.replace(/\\/g, '/')),
         style: {
           backgroundImage: `url(${images[i].value})`
