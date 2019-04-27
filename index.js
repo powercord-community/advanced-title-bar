@@ -23,8 +23,8 @@ module.exports = class AdvancedTitleBar extends Plugin {
   }
 
   getApplications () {
-    const cmds = this.settings.get('cmds').filter(c => c.value)
-    const images = this.settings.get('images').filter(c => c.value)
+    const cmds = this.settings.get('cmds', []).filter(c => c.value)
+    const images = this.settings.get('images', []).filter(c => c.value)
     return cmds.map(({ key, value }, i) => {
       if (!images[i]) {
         return null
@@ -49,7 +49,7 @@ module.exports = class AdvancedTitleBar extends Plugin {
     if (this.titleBarGames) {
       inject('powercord-titleBarApps', powercord.pluginManager.get('pc-titleBarGames'), 'getApplications', (_, res) => {
         const libIcon = res.pop()
-        const limit = Math.abs(Math.trunc(this.settings.get('limit')))
+        const limit = Math.abs(Math.trunc(this.settings.get('limit', 40)))
         const apps = isNaN(limit) ? res : res.slice(0, limit || 40)
         apps.push(libIcon)
         apps.unshift(...this.getApplications(), React.createElement('div', {
