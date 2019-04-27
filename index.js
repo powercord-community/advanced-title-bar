@@ -7,12 +7,8 @@ const { shell: { openItem } } = require('electron')
 const { resolve } = require('path')
 
 module.exports = class AdvancedTitleBar extends Plugin {
-  constructor () {
-    super()
-    this.titleBarGames = powercord.pluginManager.isEnabled('pc-titleBarGames')
-  }
-
   async startPlugin () {
+    this.titleBarGames = powercord.pluginManager.isEnabled('pc-titleBarGames')
     if (process.platform !== 'win32') {
       return this.warn('Exiting due to unsupported platform.')
     }
@@ -64,8 +60,7 @@ module.exports = class AdvancedTitleBar extends Plugin {
     } else {
       const _this = this
       const TitleBarComponent = instance._reactInternalFiber.child.child.type
-      const TitleBarAppsComponent = class TitleBarAppsComponent extends React.Component {
-        render () {
+      const TitleBarAppsComponent = () => {
           const directTitleBar = new TitleBarComponent({})
 
           directTitleBar.props.children.splice(1, 0,
@@ -76,7 +71,6 @@ module.exports = class AdvancedTitleBar extends Plugin {
 
           return directTitleBar
         }
-      }
       inject('powercord-titleBarApps', instance, 'render', () =>
         React.createElement(TitleBarAppsComponent)
       )
